@@ -68,6 +68,15 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 - Website - [https://nestjs.com](https://nestjs.com/)
 - Twitter - [@nestframework](https://twitter.com/nestframework)
 
+## Required Evn variables
+- AWS_ACCESS_KEY_ID
+- AWS_SECRET_ACCESS_KEY
+- AWS_S3_REGION=us-east-1
+- AWS_BUCKET_NAME
+- UPLOAD_RATE_TTL
+- UPLOAD_RATE_LIMIT
+
+
 ## License
 
 Nest is [MIT licensed](LICENSE).
