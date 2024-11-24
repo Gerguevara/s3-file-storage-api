@@ -1,6 +1,7 @@
 import {
   Controller,
   ParseFilePipe,
+  Logger,
   Post,
   UploadedFile,
   UseInterceptors,
@@ -10,7 +11,8 @@ import { UploadService } from './upload.service';
 
 @Controller('upload')
 export class UploadController {
-  constructor(private readonly uploadService: UploadService) {}
+  logger = new Logger('UploadController');
+  constructor(private readonly uploadService: UploadService) { }
 
   @Post()
   @UseInterceptors(FileInterceptor('file'))
@@ -25,6 +27,14 @@ export class UploadController {
     )
     file: Express.Multer.File,
   ) {
-    await this.uploadService.upload(file.originalname, file.buffer);
+    try {
+      await this.uploadService.upload(file.originalname, file.buffer);
+      this.logger.log('File uploaded successfully on Bucket');
+      return { message: 'File uploaded successfully' };
+    }
+   catch (error) {
+      this.logger.error(error);
+      return { message: 'File upload failed' };
+    }
   }
 }
